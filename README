@@ -16,4 +16,19 @@ optional arguments:
   -h, --help  show this help message and exit
   -r          Recursive search.
   -d          List Only directories.
+
+$ pls -rd ''
+./The Boss Baby 2017 720p CAM x264 AC3 TiTAN
+./.f
+./documents
+./versions
+
+$ pls -r '\.py$'
+./decorator_info.py
+./versions/940992504396_.py
+./repo.py
+
+$ pls -d '^v.*s.*s$'
+versions
+
 ```

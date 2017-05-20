@@ -10,6 +10,7 @@ class Search:
         self.only_directories = only_directories
         self.files = set()
         self.final_files = set()
+        self.cwd = os.getcwd()
 
     def list_files(self):
         """List all the files."""
@@ -20,16 +21,16 @@ class Search:
             # if the only_directories option is set to True
             # then search only for the directories else search for files
             if self.only_directories:
-                for path, dirs, files in os.walk('.'):
-                    for dir in dirs:
-                        self.files.add(os.path.join(path, dir))
+                for path, dirs, files in os.walk(self.cwd):
+                    for directory in dirs:
+                        self.files.add(os.path.join(path.replace(self.cwd, '.'), directory))
             else:
-                for path, dirs, files in os.walk('.'):
+                for path, dirs, files in os.walk(self.cwd):
                     for fil in files:
-                        self.files.add(os.path.join(path, fil))
+                        self.files.add(os.path.join(path.replace(self.cwd, '.'), fil))
 
         else:
-            files = os.listdir('.')
+            files = os.listdir(self.cwd)
             if self.only_directories:
                 for fil in files:
                     if os.path.isdir(fil):
@@ -69,4 +70,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
