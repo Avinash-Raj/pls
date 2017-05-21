@@ -3,6 +3,14 @@ pls
 
 Python script to list files or folders according to the input regex. `pls` command without any optional argument should list only the files. For folders or to enable recursive serach, you have to enable `-d`, `-r` options. 
 
+To install this package, you have to run
+
+```sh
+sudo python setup.py install
+```
+
+Now you're free to use `pls` command from anywhere.
+
 ```sh
 $ python pls.py -h
 usage: pls.py [-h] [-r] [-d] regex
