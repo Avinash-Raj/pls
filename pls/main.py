@@ -5,12 +5,13 @@ import argparse
 
 class Search:
     def __init__(self, regex, is_recursive=False, only_directories=False):
-        self.regex = re.compile(regex)
+        self.regex = re.compile(r'(?m)' + regex)
         self.is_recursive = is_recursive
         self.only_directories = only_directories
         self.files = set()
         self.final_files = set()
         self.cwd = os.getcwd()
+        self.colorize = True if os.name == 'posix' else False
 
     def list_files(self):
         """List all the files."""
@@ -51,8 +52,21 @@ class Search:
                 self.final_files.add(fil)
 
     def print_files(self):
-        for fil in self.final_files:
-            print (fil)
+        final_files = list(self.final_files)
+        if len(final_files) > 10:
+            i = int(len(final_files)/2)
+            if self.colorize and self.only_directories:
+                for x, y in zip(final_files[:i], final_files[i:]):
+                    print('\033[93m {0: <30}{1} \033[0m'.format(x, y))
+            elif self.colorize and not self.only_directories:
+                for x, y in zip(final_files[:i], final_files[i:]):
+                    print('\033[94m {0: <30}{1} \033[0m'.format(x, y))
+            else:
+                for x, y in zip(final_files[:i], final_files[i:]):
+                    print('{0: <30}{1}'.format(x, y))
+            return
+        for fil in final_files:
+            print ('\033[93m {} \033[0m'.format(fil) if self.colorize else fil)
 
 
 def main():
