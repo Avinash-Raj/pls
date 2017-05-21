@@ -1,7 +1,7 @@
 pls
 ==============
 
-Python script to list files or folders according to the input regex. `pls` command without any optional argument should list only the files. To list folders or to do a recursive serach, you have to enable `-d`, `-r` options. 
+Python script to list files or folders according to the input regex. `pls` command without any optional argument should list only the files. To list folders or to do a recursive search, you have to enable `-d`, `-r` options. 
 
 To install this package, you have to run
 
